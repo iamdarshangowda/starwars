@@ -1,8 +1,8 @@
-import { getPeople } from "../config/axiosClient";
+import { get } from "../config/axiosClient";
 
 const getAllPeople = async (page?: number) => {
   try {
-    const people = await getPeople(`people/?page=${page}`);
+    const people = await get(`people/?page=${page}`);
     return people.data;
   } catch (error) {
     console.log(error);
