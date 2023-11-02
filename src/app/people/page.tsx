@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import getAllPeople from "../../apis/getAllPeople";
 import { useQuery } from "react-query";
 import Card from "@components/Card";
@@ -11,6 +11,9 @@ const People = () => {
   const [totalPage, setTotalPage] = useState(10);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [singlePerson, setSinglePerson] = useState<any>();
+
+  const [searchText, setSearchText] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
   const {
     isLoading,
@@ -45,15 +48,40 @@ const People = () => {
   const handleModalClose = () => {
     setShowModal(false);
   };
+
+  useEffect(() => {
+    if (!searchText && peoplesList?.results) {
+      setFilteredData(peoplesList.results);
+    } else if (peoplesList?.results) {
+      const filtered = peoplesList.results.filter((person: any) =>
+        person.name.toLowerCase().includes(searchText.toLocaleLowerCase())
+      );
+      setFilteredData(filtered);
+    }
+  }, [searchText, peoplesList]);
+
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setSearchText(value);
+  };
   console.log(peoplesList?.results);
   return (
-    <div className={`${showModal ? "blur-sm" : "blur-0"}`}>
-      <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-20">
+    <div className={`p-4 ${showModal ? "blur-sm" : "blur-0"}`}>
+      <div>
+        <input
+          type="text"
+          value={searchText}
+          onChange={handleSearch}
+          className="p-2 border-none rounded-lg"
+          placeholder="search here..."
+        />
+      </div>
+      <div className="py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-20">
         {isLoading
           ? new Array(10)
               .fill("")
               .map((n, index) => <CardSkeleton key={index} />)
-          : peoplesList.results.map((people: any, index: number) => {
+          : filteredData.map((people: any, index: number) => {
               return (
                 <Card
                   key={index}
@@ -65,7 +93,7 @@ const People = () => {
       </div>
 
       {/* Pagination */}
-      <div className="p-4 flex gap-2 sm:gap-6 justify-center items-center fixed bottom-0 left-0 right-0 ">
+      <div className="flex gap-2 sm:gap-6 justify-center items-center fixed bottom-0 left-0 right-0 ">
         <button
           className={`w-20 px-2 py-4 ${
             page === 1 ? "bg-grey-3 text-grey-2" : "bg-neon text-grey-9"
