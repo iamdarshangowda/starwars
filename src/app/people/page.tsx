@@ -45,9 +45,9 @@ const People = () => {
   const handleModalClose = () => {
     setShowModal(false);
   };
-
+  console.log(peoplesList?.results);
   return (
-    <div>
+    <div className={`${showModal ? "blur-sm" : "blur-0"}`}>
       <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-20">
         {isLoading
           ? new Array(10)

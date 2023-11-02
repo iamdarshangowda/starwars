@@ -21,7 +21,11 @@ const ViewPeople = (props: IViewPeople) => {
       <div className="relative ">
         <Image
           key={singlePerson.name}
-          src={`https://picsum.photos/id/${singlePerson.mass}/300`}
+          src={`https://picsum.photos/id/${
+            isNaN(Number(singlePerson.mass))
+              ? 77
+              : Math.floor(singlePerson.mass)
+          }/300`}
           width={0}
           height={0}
           sizes="100vw"
