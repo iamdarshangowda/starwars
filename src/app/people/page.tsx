@@ -4,10 +4,13 @@ import getAllPeople from "../../apis/getAllPeople";
 import { useQuery } from "react-query";
 import Card from "@components/Card";
 import CardSkeleton from "@components/CardSkeleton";
+import ViewPeople from "@components/viewPeople";
 
 const People = () => {
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(10);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [singlePerson, setSinglePerson] = useState<any>();
 
   const {
     isLoading,
@@ -34,6 +37,15 @@ const People = () => {
     return { nextPage, prevPage };
   }
 
+  const handleSinglePerson = (people: number) => {
+    setSinglePerson(people);
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+
   return (
     <div>
       <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-20">
@@ -42,7 +54,13 @@ const People = () => {
               .fill("")
               .map((n, index) => <CardSkeleton key={index} />)
           : peoplesList.results.map((people: any, index: number) => {
-              return <Card key={index} people={people} />;
+              return (
+                <Card
+                  key={index}
+                  people={people}
+                  onClick={() => handleSinglePerson(people)}
+                />
+              );
             })}
       </div>
 
@@ -67,6 +85,14 @@ const People = () => {
           Next
         </button>
       </div>
+
+      {/* Modal */}
+      <ViewPeople
+        singlePerson={singlePerson}
+        showModal={showModal}
+        setShowModal={setShowModal}
+        handleModalClose={handleModalClose}
+      />
     </div>
   );
 };

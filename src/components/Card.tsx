@@ -3,17 +3,21 @@ import React, { FunctionComponent } from "react";
 
 interface ICardProps {
   people: any;
+  onClick: () => void;
 }
 
 const Card: FunctionComponent<ICardProps> = (props) => {
-  const { people } = props;
+  const { people, onClick } = props;
 
   return (
-    <div className="border border-neon px-5 py-5 rounded-lg shadow-sm hover:shadow-lg cursor-pointer hover:-translate-y-1 transition-all">
+    <div
+      onClick={onClick}
+      className="border border-neon px-5 py-5 rounded-lg shadow-sm hover:shadow-lg cursor-pointer hover:-translate-y-1 transition-all"
+    >
       <div>
         <Image
           key={people.name}
-          src={`https://picsum.photos/id/${people.mass}/200/300`}
+          src={`https://picsum.photos/id/${people.mass}/300`}
           width={0}
           height={0}
           sizes="100vw"
