@@ -9,7 +9,7 @@ const Card: FunctionComponent<ICardProps> = (props) => {
   const { people } = props;
 
   return (
-    <div className="border border-neon p-5 rounded-lg shadow-sm hover:shadow-lg cursor-pointer hover:-translate-y-1 transition-all">
+    <div className="border border-neon px-5 py-5 rounded-lg shadow-sm hover:shadow-lg cursor-pointer hover:-translate-y-1 transition-all">
       <div>
         <Image
           key={people.name}
@@ -22,7 +22,7 @@ const Card: FunctionComponent<ICardProps> = (props) => {
         />
       </div>
       <div>
-        <p className="text-heading-3/h1 p-2 py-4 text-center text-accentMedium">
+        <p className="text-heading-3/h1 pt-3 text-center text-accentMedium">
           {people.name}
         </p>
       </div>

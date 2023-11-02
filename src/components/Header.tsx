@@ -3,10 +3,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div
-      className="fixed top-0 left-0 right-0 p-6 flex justify-between items-center 
-    bg-gradient-to-r from-primaryDark to-secondaryDark"
-    >
+    <div className="p-6 flex justify-between items-center gap-2">
       <Link href="/people">
         <h1 className="text-heading-2/h1 text-accentLight">Starwars</h1>
       </Link>

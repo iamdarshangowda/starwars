@@ -36,7 +36,7 @@ const People = () => {
 
   return (
     <div>
-      <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-20">
         {isLoading
           ? new Array(10)
               .fill("")
@@ -47,7 +47,7 @@ const People = () => {
       </div>
 
       {/* Pagination */}
-      <div className="p-4 flex gap-6 justify-center items-center">
+      <div className="p-4 flex gap-2 sm:gap-6 justify-center items-center fixed bottom-0 left-0 right-0 ">
         <button
           className={`w-20 px-2 py-4 ${
             page === 1 ? "bg-grey-3 text-grey-2" : "bg-neon text-grey-9"
