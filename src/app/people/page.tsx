@@ -64,9 +64,13 @@ const People = () => {
         className={`py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-20
       ${showModal ? "blur-sm" : "blur-0"} `}
       >
-        {isLoading ? (
-          new Array(10).fill("").map((n, index) => <CardSkeleton key={index} />)
-        ) : filteredData.length ? (
+        {isLoading
+          ? new Array(10)
+              .fill("")
+              .map((n, index) => <CardSkeleton key={index} />)
+          : null}
+
+        {filteredData.length ? (
           filteredData.map((people: any, index: number) => {
             return (
               <Card
@@ -81,6 +85,12 @@ const People = () => {
             No People Found
           </p>
         )}
+
+        {error ? (
+          <p className="text-center text-body-1/b2 text-grey-0 ">
+            Somthing went wrong
+          </p>
+        ) : null}
       </div>
 
       {/* Pagination */}
