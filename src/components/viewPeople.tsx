@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import { CloseIcon } from "./icons/closeIcon";
 import Image from "next/image";
 import getDateFormat from "../utils/getDateFormat";
+import { COLOR } from "../utils/constants";
 
 interface IViewPeople {
   setShowModal: Dispatch<SetStateAction<boolean>>;
@@ -40,7 +41,13 @@ const ViewPeople = (props: IViewPeople) => {
           <CloseIcon />
         </div>
       </div>
-      <div className="bg-accentMedium p-4 md:p-8">
+      <div
+        className="p-4 md:p-8"
+        style={{
+          background:
+            COLOR[singlePerson?.skin_color?.split(",")[0]] ?? "#9fdbaf",
+        }}
+      >
         <div className="flex justify-between items-center py-2 md:py-4">
           <h1 className="text-heading-3/h1 text-center text-primaryDark">
             {singlePerson.name}

@@ -9,7 +9,7 @@ import SelectInput from "./inputs/selectInput";
 import getAllFilterBy from "../apis/getFilmList";
 import { useQuery } from "react-query";
 
-const FILTER_BY = ["None", "Films", "Species "];
+const FILTER_BY = ["None", "Films", "Species"];
 
 interface ISearchProp {
   setFilteredSearch: Dispatch<SetStateAction<any[]>>;
@@ -40,54 +40,77 @@ const SearchFilter = (props: ISearchProp) => {
     enabled: filterBy.toLocaleLowerCase() !== "none",
   });
 
-  //   useEffect(() => {
-  //     if (!peoplesList?.results) return;
+  useEffect(() => {
+    if (!peoplesList?.results) return;
 
-  //     if (!searchText && filterBy.toLocaleLowerCase() === "none") {
-  //       setFilteredSearch(peoplesList || []);
-  //       return;
-  //     }
+    if (!searchText && filterBy.toLocaleLowerCase() === "none") {
+      console.log("here");
+      setSelectBy("");
+      setFilteredSearch(peoplesList.results || []);
+      return;
+    }
 
-  //     if (searchText && filterBy.toLocaleLowerCase() !== "none") {
-  //       const filtered = filteredData.filter((person: any) =>
-  //         person.name.toLowerCase().includes(searchText.toLocaleLowerCase())
-  //       );
-  //       setFilteredSearch(filtered);
-  //       return;
-  //     }
+    if (searchText && filterBy.toLocaleLowerCase() !== "none") {
+      console.log("here 2");
+      // Search Filter
+      let updated = peoplesList.results.filter((person: any) =>
+        person.name.toLowerCase().includes(searchText.toLocaleLowerCase())
+      );
 
-  //     if (searchText && filterBy.toLocaleLowerCase() === "none") {
-  //       const filtered = peoplesList.results.filter((person: any) =>
-  //         person.name.toLowerCase().includes(searchText.toLocaleLowerCase())
-  //       );
-  //       setFilteredSearch(filtered);
-  //       return;
-  //     }
+      // Filter By
+      if (selectList?.length) {
+        const filterPersonList: any = selectList.find(
+          (list: any) => list.title.toLowerCase() === selectBy
+        );
+        updated = updated.filter((people: any) =>
+          people[filterBy.toLocaleLowerCase()].includes(filterPersonList.url)
+        );
+      }
 
-  //     if (!searchText && filterBy.toLocaleLowerCase() !== "none") {
-  //       const filterPersonList: any = selectList.find(
-  //         (list: any) => list.title.toLowerCase() === selectBy
-  //       );
+      setFilteredSearch(updated);
+      return;
+    }
 
-  //       const selectByFilter = filteredData.filter((people: any) =>
-  //         people[filterBy.toLocaleLowerCase()].includes(filterPersonList.url)
-  //       );
-  //       console.log(selectByFilter);
-  //       setFilteredSearch(selectByFilter);
-  //     }
-  //   }, [searchText, peoplesList, filterBy, selectBy]);
+    if (searchText && filterBy.toLocaleLowerCase() === "none") {
+      console.log("here 3");
+      const filtered = peoplesList.results.filter((person: any) =>
+        person.name.toLowerCase().includes(searchText.toLocaleLowerCase())
+      );
+      setFilteredSearch(filtered);
+      return;
+    }
+
+    if (
+      !searchText &&
+      filterBy.toLocaleLowerCase() !== "none" &&
+      selectList?.length
+    ) {
+      console.log("here 4");
+      const filterPersonList: any = selectList.find(
+        (list: any) => list.title.toLowerCase() === selectBy
+      );
+
+      let selectByFilter = peoplesList.results;
+      if (filterPersonList?.url) {
+        selectByFilter = selectByFilter.filter((people: any) =>
+          people[filterBy.toLocaleLowerCase()]?.includes(filterPersonList?.url)
+        );
+      }
+
+      setFilteredSearch(selectByFilter);
+    }
+  }, [searchText, peoplesList, filterBy, selectBy]);
 
   const handleFilterBy = (e: any) => {
     setFilterBy(e.target.value);
   };
 
   const handleSelectBy = (e: any) => {
-    console.log(e.target.value);
     setSelectBy(e.target.value);
   };
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between flex-wrap gap-2">
       <input
         type="text"
         value={searchText}

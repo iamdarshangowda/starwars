@@ -28,8 +28,8 @@ const SelectInput = (props: ISelectProps) => {
       <select
         name="list_type"
         id="list_type"
-        className="p-3 sm:p-2 w-[70%] bg-grey-10 border border-grey-20 rounded-lg
-        text-body-1/b1 text-grey-40 hover:cursor-pointer ml-auto"
+        className="p-2 w-full bg-grey-10 border border-grey-20 rounded-lg
+        text-body-1/b1 text-grey-40 hover:cursor-pointer "
         onChange={onChange}
         value={value}
         disabled={loading}

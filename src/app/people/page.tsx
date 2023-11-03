@@ -52,7 +52,7 @@ const People = () => {
   useEffect(() => {
     if (peoplesList) setFilteredData(peoplesList.results);
   }, [peoplesList]);
-  console.log(filteredData);
+  // console.log(filteredData);
   // console.log(peoplesList?.results);
   return (
     <div className={`p-4 ${showModal ? "blur-sm" : "blur-0"}`}>
