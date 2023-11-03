@@ -16,7 +16,7 @@ const SelectInput = (props: ISelectProps) => {
     return (
       <div className=" flex gap-1 w-full">
         <LoadingSpinner />
-        <p className="text-grey-0">Geting Lists...</p>
+        <p className="text-grey-0">Getting Lists...</p>
       </div>
     );
 

@@ -8,5 +8,6 @@ body {
   box-sizing: border-box;
   @apply scroll-smooth;
 
+  height: 100vh;
   background-image: linear-gradient(to bottom right, #0f1d27, #4a7065);
 }
