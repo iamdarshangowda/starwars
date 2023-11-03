@@ -24,7 +24,8 @@ const SignUp = () => {
         router.replace("/people");
       });
     } catch (error: any) {
-      console.log(error.response.data.message);
+      console.log(error.response.data.error);
+      alert(error.response.data.error);
     } finally {
       setLoading(false);
     }

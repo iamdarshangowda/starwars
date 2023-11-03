@@ -24,7 +24,8 @@ const Login = () => {
         setLoading(false);
       });
     } catch (error: any) {
-      // console.log(error.response.data.message);
+      console.log(error.response.data.error);
+      alert(error.response.data.error);
       setLoading(false);
     }
   };
