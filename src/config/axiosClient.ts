@@ -15,7 +15,7 @@ export const getVerify = async (apiEndpoint: string) => {
   return axios.get(`${AUTH_URL}/${apiEndpoint}`, {
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
-      Authorization: "Bearer " + token,
+      Authorization: `Bearer ${token}`,
     },
   });
 };

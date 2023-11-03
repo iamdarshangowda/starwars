@@ -18,8 +18,13 @@ const SignUp = () => {
 
     try {
       await noAuthPost("user/signup", formData).then((data) => {
-        const token = data.data.accessToekn;
+        const token = data.data.accessToken;
+        const refreshToken = data.data.refreshToken;
         localStorage.setItem("starwarsToken", JSON.stringify(token));
+        localStorage.setItem(
+          "starwarsRefreshToken",
+          JSON.stringify(refreshToken)
+        );
         console.log(data.data);
         router.replace("/people");
       });
