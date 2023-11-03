@@ -1,3 +1,4 @@
+import LoadingSpinner from "@components/icons/loadingSpinner";
 import React from "react";
 
 interface ISelectProps {
@@ -10,10 +11,18 @@ interface ISelectProps {
 
 const SelectInput = (props: ISelectProps) => {
   const { optionsList, onChange, value, text, loading } = props;
-  if (loading) return <p>Loading...</p>;
+
+  if (loading)
+    return (
+      <div className=" flex gap-1 w-full">
+        <LoadingSpinner />
+        <p className="text-grey-0">Geting Lists...</p>
+      </div>
+    );
+
   return (
     <div className="max-w-lg w-full flex gap-4 items-center">
-      <label htmlFor="list_type" className="text-body-1/b2">
+      <label htmlFor="list_type" className="text-body-1/b2 text-grey-0">
         {text}
       </label>
       <select
@@ -39,7 +48,7 @@ const SelectInput = (props: ISelectProps) => {
                 : option.toLocaleLowerCase()
             }
           >
-            {loading ? "Loading..." : option?.title ? option?.title : option}
+            {option?.title ? option?.title : option}
           </option>
         ))}
       </select>

@@ -40,42 +40,42 @@ const SearchFilter = (props: ISearchProp) => {
     enabled: filterBy.toLocaleLowerCase() !== "none",
   });
 
-  useEffect(() => {
-    if (!peoplesList?.results) return;
+  //   useEffect(() => {
+  //     if (!peoplesList?.results) return;
 
-    if (!searchText && filterBy.toLocaleLowerCase() === "none") {
-      setFilteredSearch(peoplesList || []);
-      return;
-    }
+  //     if (!searchText && filterBy.toLocaleLowerCase() === "none") {
+  //       setFilteredSearch(peoplesList || []);
+  //       return;
+  //     }
 
-    if (searchText && filterBy.toLocaleLowerCase() !== "none") {
-      const filtered = filteredData.filter((person: any) =>
-        person.name.toLowerCase().includes(searchText.toLocaleLowerCase())
-      );
-      setFilteredSearch(filtered);
-      return;
-    }
+  //     if (searchText && filterBy.toLocaleLowerCase() !== "none") {
+  //       const filtered = filteredData.filter((person: any) =>
+  //         person.name.toLowerCase().includes(searchText.toLocaleLowerCase())
+  //       );
+  //       setFilteredSearch(filtered);
+  //       return;
+  //     }
 
-    if (searchText && filterBy.toLocaleLowerCase() === "none") {
-      const filtered = peoplesList.results.filter((person: any) =>
-        person.name.toLowerCase().includes(searchText.toLocaleLowerCase())
-      );
-      setFilteredSearch(filtered);
-      return;
-    }
+  //     if (searchText && filterBy.toLocaleLowerCase() === "none") {
+  //       const filtered = peoplesList.results.filter((person: any) =>
+  //         person.name.toLowerCase().includes(searchText.toLocaleLowerCase())
+  //       );
+  //       setFilteredSearch(filtered);
+  //       return;
+  //     }
 
-    if (!searchText && filterBy.toLocaleLowerCase() !== "none") {
-      const filterPersonList: any = selectList.find(
-        (list: any) => list.title.toLowerCase() === selectBy
-      );
+  //     if (!searchText && filterBy.toLocaleLowerCase() !== "none") {
+  //       const filterPersonList: any = selectList.find(
+  //         (list: any) => list.title.toLowerCase() === selectBy
+  //       );
 
-      const selectByFilter = filteredData.filter((people: any) =>
-        people[filterBy.toLocaleLowerCase()].includes(filterPersonList.url)
-      );
-      console.log(selectByFilter);
-      setFilteredSearch(selectByFilter);
-    }
-  }, [searchText, peoplesList, filterBy, selectBy]);
+  //       const selectByFilter = filteredData.filter((people: any) =>
+  //         people[filterBy.toLocaleLowerCase()].includes(filterPersonList.url)
+  //       );
+  //       console.log(selectByFilter);
+  //       setFilteredSearch(selectByFilter);
+  //     }
+  //   }, [searchText, peoplesList, filterBy, selectBy]);
 
   const handleFilterBy = (e: any) => {
     setFilterBy(e.target.value);
@@ -95,7 +95,7 @@ const SearchFilter = (props: ISearchProp) => {
         className="p-2 border-none rounded-lg"
         placeholder="search here..."
       />
-      <div className="flex gap-8">
+      <div className="flex gap-8 items-center">
         <SelectInput
           optionsList={FILTER_BY}
           onChange={handleFilterBy}
