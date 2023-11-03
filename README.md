@@ -1,5 +1,7 @@
 Starwars Assignment
 
+[LIVE SITE](https://starwars-lemon.vercel.app/)
+
 1. JWT Authentication with token refresh
 2. Backend ExpressJs and MongoDB for storing user login details and authentication.
 3. Search and Filter People
