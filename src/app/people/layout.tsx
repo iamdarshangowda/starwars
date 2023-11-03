@@ -3,9 +3,9 @@ import { AuthGaurdWrapper } from "../../context/routeGaurd";
 
 const PeopleLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <>
+    <div>
       <AuthGaurdWrapper>{children}</AuthGaurdWrapper>
-    </>
+    </div>
   );
 };
 
