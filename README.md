@@ -1,3 +1,12 @@
+Starwars Assignment
+
+1. JWT Authentication with token refresh
+2. Backend ExpressJs and MongoDB for storing user login details and authentication.
+3. Search and Filter People
+4. React Query for API calls and caching
+5. Auth Guard for '/people' route. If user is not authenticated will be logged out.
+6. Card colors based om skin color of people.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
