@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 import { noAuthPost } from "../../config/axiosClient";
+import LoadingSpinner from "@components/icons/loadingSpinner";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -31,6 +32,7 @@ const Login = () => {
     } catch (error: any) {
       console.log(error.response.data.error);
       alert(error.response.data.error);
+    } finally {
       setLoading(false);
     }
   };
@@ -61,7 +63,7 @@ const Login = () => {
           required
         />
         <button className="text-grey-9 p-2 w-[100px] border bg-neon text-body-2/b2 rounded-lg">
-          Login
+          {loading ? <LoadingSpinner /> : "Login"}
         </button>
       </form>
     </div>
